@@ -1,18 +1,17 @@
-console.log("Rock Papers Scissors");
+console.log("Rock Papers Scissors. Best of 5");
 
-//Start a game for five rounds
+//Start a game for five rounds - COMPLETE
     //Determine computer selection for round - COMPLETE
     //Receive input from user selection round - COMPLETE
-        //Check for acceptable value
+        //Check for acceptable value - COMPLETE
     //Determine winner of round - COMPLETE
-    //Return selections
-    //Return win/lose message
-    //Rerun on tie or invalid entries
+    //Return selections- COMPLETE
+    //Return win/lose message - COMPLETE
+    //Require replay on tie or invalid entries - COMPLETE
     //Track number of wins/loses within game - COMPLETE
-    //Iterate for five rounds
-//Determine winner of game
-//Return winner of game
-//Start new game
+    //Iterate for five rounds - COMPLETE
+//Determine winner of game - COMPLETE
+//Return winner of game - COMPLETE
 
 
 
@@ -32,29 +31,35 @@ function gameTime() {
             case "win":
                 ++winCounter;
                 ++i;
-                console.log("Win")
+                console.log("You win this round")
                 break;
         
             case "loss":
                 ++lossCounter;
                 ++i;
-                console.log("Loss")
+                console.log("You lose this round")
                 break;
 
             case "tie":
                 ++tieCounter;
-                console.log("Tied, replay round");
+                console.log("You tied, replay round");
                 break;
 
             default:
                 ++defaultCounter;
-                console.log("Invalid, replay round");
+                console.log("You entered an invalid value, replay round");
         }
 
-        console.log(winCounter, lossCounter)
+        console.log(winCounter, lossCounter);
         
     }
 
+    if (winCounter > lossCounter) {
+        return `You won the game ${winCounter} to ${lossCounter}`;
+    }
+        else {
+        return `You lose the game ${winCounter} to ${lossCounter}`;
+    }
 
 }
 
@@ -77,8 +82,8 @@ function determineRoundWinner () {
     let userChoice = getUserChoice();
     let roundStatus = "In Progress"
 
-    console.log(computerChoice);
-    console.log(userChoice)
+    console.log(`Computer shoots ${computerChoice}`);
+    console.log(`You shoot ${userChoice}`);
 
     switch (computerChoice) {
         case "rock":
