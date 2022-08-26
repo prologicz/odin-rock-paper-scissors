@@ -1,18 +1,56 @@
 console.log("Rock Papers Scissors");
 
 //Start a game for five rounds
-    //Determine computer selection for round
-    //Receive input from user selection round
+    //Determine computer selection for round - COMPLETE
+    //Receive input from user selection round - COMPLETE
         //Check for acceptable value
-    //Determine winner of round
+    //Determine winner of round - COMPLETE
     //Return selections
     //Return win/lose message
-    //Track number of wins/loses within game
+    //Rerun on tie or invalid entries
+    //Track number of wins/loses within game - COMPLETE
     //Iterate for five rounds
 //Determine winner of game
 //Return winner of game
 //Start new game
 
+
+
+
+function gameTime() { 
+
+    let winCounter = 0;
+    let tieCounter = 0;
+    let lossCounter = 0;
+    let defaultCounter = 0;
+
+    for (let i = 0; i < 5; i++) {
+        
+        let roundStatus = determineRoundWinner();
+
+        switch (roundStatus) {
+            case "win":
+                ++winCounter;
+                break;
+        
+            case "loss":
+                ++lossCounter;
+                break;
+
+            case "tie":
+                ++tieCounter;
+                break;
+
+            default:
+                ++defaultCounter;
+        }
+
+        console.log(winCounter, lossCounter, tieCounter, defaultCounter)
+        
+    }
+
+
+}
 
 function getComputerChoice() {
     const computerOptions = ["rock", "paper", "scissors"];
@@ -98,4 +136,4 @@ function determineRoundWinner () {
 
 
 
-console.log(determineRoundWinner())
+console.log(gameTime())
