@@ -24,28 +24,34 @@ function gameTime() {
     let lossCounter = 0;
     let defaultCounter = 0;
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; ) {
         
         let roundStatus = determineRoundWinner();
 
         switch (roundStatus) {
             case "win":
                 ++winCounter;
+                ++i;
+                console.log("Win")
                 break;
         
             case "loss":
                 ++lossCounter;
+                ++i;
+                console.log("Loss")
                 break;
 
             case "tie":
                 ++tieCounter;
+                console.log("Tied, replay round");
                 break;
 
             default:
                 ++defaultCounter;
+                console.log("Invalid, replay round");
         }
 
-        console.log(winCounter, lossCounter, tieCounter, defaultCounter)
+        console.log(winCounter, lossCounter)
         
     }
 
