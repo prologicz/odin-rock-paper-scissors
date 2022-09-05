@@ -1,6 +1,6 @@
-console.log("Rock Papers Scissors. Best of 5");
+console.log("Rock Papers Scissors. First to 5");
 
-function startRound (e) {
+function playRound (e) {
 
     if(userScore === 5 || computerScore === 5) userScore = computerScore = 0;
     
@@ -8,18 +8,16 @@ function startRound (e) {
     let userChoice = e.target.id;
 
 
-
-
-    roundStatus = playRound(computerChoice, userChoice);
+    roundStatus = calculateWinner(computerChoice, userChoice);
     messageSelections(computerChoice, userChoice);
     messageRoundWinner(roundStatus);
     scoreKeeper(roundStatus);
     messageScore();
+    gameWinner();
 
     console.log(userScore);
     console.log(computerScore);
 
-    return roundStatus;
 }
 
 function getComputerChoice() {
@@ -29,7 +27,7 @@ function getComputerChoice() {
     return computerOptions[computerSelector];
 }
 
-function playRound (computerChoice, userChoice) {
+function calculateWinner (computerChoice, userChoice) {
 
     console.log(`Computer shoots ${computerChoice}`);
     console.log(`You shoot ${userChoice}`);
@@ -174,10 +172,36 @@ function messageScore () {
 
 }
 
+function gameWinner () {
+
+    const feedback = document.querySelector(".feedback");
+
+    const resetWinMessage = document.getElementById("winMessage");
+    if(resetWinMessage) feedback.removeChild(resetWinMessage);
+
+    const resetLoseMessage = document.getElementById("loseMessage");
+    if(resetLoseMessage) feedback.removeChild(resetLoseMessage);
+
+    if (userScore === 5) {
+        const winMessage = document.createElement ("div");
+        winMessage.id = "winMessage";
+        winMessage.innerText = "\nCongrats.  You got to five wins before the computer"
+        feedback.appendChild(winMessage);
+    }
+
+    else if (computerScore === 5) {
+        const loseMessage = document.createElement ("div");
+        loseMessage.id = "loseMessage";
+        loseMessage.innerText = "\nSorry.  The computer got to five wins before you"
+        feedback.appendChild(loseMessage);
+    }
+
+}
+
 let userScore = 0;
 let computerScore = 0;
 const buttonSelection = document.querySelectorAll('button');
-buttonSelection.forEach(button => button.addEventListener('click', startRound))
+buttonSelection.forEach(button => button.addEventListener('click', playRound))
 
 
 
