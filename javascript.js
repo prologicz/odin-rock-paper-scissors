@@ -1,50 +1,25 @@
 console.log("Rock Papers Scissors. Best of 5");
 
-function gameTime() { 
+function startRound (e) {
 
-    let winCounter = 0;
-    let tieCounter = 0;
-    let lossCounter = 0;
-    let defaultCounter = 0;
+    if(userScore === 5 || computerScore === 5) userScore = computerScore = 0;
+    
+    let computerChoice = getComputerChoice();
+    let userChoice = e.target.id;
 
-    for (let i = 0; i < 5; ) {
-        
-        let roundStatus = determineRoundWinner();
 
-        switch (roundStatus) {
-            case "win":
-                ++winCounter;
-                ++i;
-                console.log("You win this round")
-                break;
-        
-            case "loss":
-                ++lossCounter;
-                ++i;
-                console.log("You lose this round")
-                break;
 
-            case "tie":
-                ++tieCounter;
-                console.log("You tied, replay round");
-                break;
 
-            default:
-                ++defaultCounter;
-                console.log("You entered an invalid value, replay round");
-        }
+    roundStatus = playRound(computerChoice, userChoice);
+    messageSelections(computerChoice, userChoice);
+    messageRoundWinner(roundStatus);
+    scoreKeeper(roundStatus);
+    messageScore();
 
-        console.log(winCounter, lossCounter);
-        
-    }
+    console.log(userScore);
+    console.log(computerScore);
 
-    if (winCounter > lossCounter) {
-        return `You won the game ${winCounter} to ${lossCounter}`;
-    }
-        else {
-        return `You lose the game ${winCounter} to ${lossCounter}`;
-    }
-
+    return roundStatus;
 }
 
 function getComputerChoice() {
@@ -54,11 +29,7 @@ function getComputerChoice() {
     return computerOptions[computerSelector];
 }
 
-function determineRoundWinner (e) {
-
-    let computerChoice = getComputerChoice();
-    let userChoice = e.target.id;
-    let roundStatus = "In Progress"
+function playRound (computerChoice, userChoice) {
 
     console.log(`Computer shoots ${computerChoice}`);
     console.log(`You shoot ${userChoice}`);
@@ -119,12 +90,29 @@ function determineRoundWinner (e) {
             roundStatus = "fail"
 
     }
-    console.log(roundStatus);
-
-
-    messageSelections(computerChoice, userChoice);
-    messageRoundWinner(roundStatus);    
     return roundStatus;
+}
+
+function scoreKeeper(roundStatus) { 
+
+    switch (roundStatus) {
+        case "win":
+            ++userScore;
+            break;
+
+        case "loss":
+            ++computerScore;
+            break;
+
+        case "tie":
+            break;
+
+        default:
+            console.log("You entered an invalid value, replay round");
+    }
+
+    return userScore;
+
 }
 
 function messageSelections (computerChoice, userChoice) {
@@ -162,10 +150,36 @@ function messageRoundWinner (roundStatus) {
     feedback.appendChild(displayRoundStatus);
 }
 
+function messageScore () {
+
+    const feedback = document.querySelector(".feedback");
+    const resetComputerScore = document.getElementById("computerScore");
+    if(resetComputerScore) feedback.removeChild(resetComputerScore);
+
+    const resetUserScore = document.getElementById("userScore");
+    if(resetUserScore) feedback.removeChild(resetUserScore);
 
 
 
+    const displayComputerScore = document.createElement("div");
+    displayComputerScore.id = "computerScore";
+    displayComputerScore.textContent =`\n\nComputer Score: ${computerScore}`;
+    feedback.appendChild(displayComputerScore);
+
+
+    const displayUserScore = document.createElement("div");
+    displayUserScore.id = "userScore";
+    displayUserScore.textContent =`\n\nUser Score: ${userScore}`;
+    feedback.appendChild(displayUserScore);
+
+}
+
+let userScore = 0;
+let computerScore = 0;
 const buttonSelection = document.querySelectorAll('button');
-buttonSelection.forEach(button => button.addEventListener('click', determineRoundWinner))
+buttonSelection.forEach(button => button.addEventListener('click', startRound))
+
+
+
 
 
