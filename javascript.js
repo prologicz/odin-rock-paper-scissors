@@ -70,16 +70,10 @@ function getComputerChoice() {
     return computerOptions[computerSelector];
 }
 
-function getUserChoice() {
-    let userSelection = prompt("Choose Rock, Paper, or Scissors.  Spelling Counts!");
-    userSelection = userSelection.toLowerCase();
+function determineRoundWinner (e) {
 
-    return userSelection;
-}
-
-function determineRoundWinner () {
     let computerChoice = getComputerChoice();
-    let userChoice = getUserChoice();
+    let userChoice = e.target.id;
     let roundStatus = "In Progress"
 
     console.log(`Computer shoots ${computerChoice}`);
@@ -145,6 +139,7 @@ function determineRoundWinner () {
     return roundStatus;
 }
 
+const buttonSelection = document.querySelectorAll('button');
+buttonSelection.forEach(button => button.addEventListener('click', determineRoundWinner))
 
 
-console.log(gameTime())
