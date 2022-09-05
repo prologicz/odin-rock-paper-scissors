@@ -137,8 +137,18 @@ function determineRoundWinner (e) {
     }
     
     console.log(roundStatus);
+
+
     const feedback = document.querySelector(".feedback");
-    feedback.innerText = `\nYou ${roundStatus}`;
+    const roundStatusReset = document.getElementById("roundStatus");
+    if (roundStatusReset) feedback.removeChild(roundStatusReset); // Reset message containing winner of prior round
+
+    const displayRoundStatus = document.createElement('div');
+    displayRoundStatus.id="roundStatus";
+    displayRoundStatus.innerText = `\nYou ${roundStatus}`;
+
+    feedback.appendChild(displayRoundStatus);
+    
     
     
     return roundStatus;
