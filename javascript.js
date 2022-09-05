@@ -135,7 +135,12 @@ function determineRoundWinner (e) {
             roundStatus = "fail"
 
     }
-
+    
+    console.log(roundStatus);
+    const feedback = document.querySelector(".feedback");
+    feedback.innerText = `\nYou ${roundStatus}`;
+    
+    
     return roundStatus;
 }
 
