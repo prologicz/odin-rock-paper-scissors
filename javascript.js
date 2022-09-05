@@ -1,21 +1,5 @@
 console.log("Rock Papers Scissors. Best of 5");
 
-//Start a game for five rounds - COMPLETE
-    //Determine computer selection for round - COMPLETE
-    //Receive input from user selection round - COMPLETE
-        //Check for acceptable value - COMPLETE
-    //Determine winner of round - COMPLETE
-    //Return selections- COMPLETE
-    //Return win/lose message - COMPLETE
-    //Require replay on tie or invalid entries - COMPLETE
-    //Track number of wins/loses within game - COMPLETE
-    //Iterate for five rounds - COMPLETE
-//Determine winner of game - COMPLETE
-//Return winner of game - COMPLETE
-
-
-
-
 function gameTime() { 
 
     let winCounter = 0;
@@ -135,24 +119,51 @@ function determineRoundWinner (e) {
             roundStatus = "fail"
 
     }
-    
     console.log(roundStatus);
 
 
+    messageSelections(computerChoice, userChoice);
+    messageRoundWinner(roundStatus);    
+    return roundStatus;
+}
+
+function messageSelections (computerChoice, userChoice) {
     const feedback = document.querySelector(".feedback");
-    const roundStatusReset = document.getElementById("roundStatus");
-    if (roundStatusReset) feedback.removeChild(roundStatusReset); // Reset message containing winner of prior round
+
+    const resetComputerSelection = document.getElementById("computerSelection"); //Identify if prior round selections are still present
+    if (resetComputerSelection) feedback.removeChild(resetComputerSelection); //If prior round selections are present, remove
+
+    const resetUserSelection = document.getElementById("userSelection"); //Identify if prior round selections are still present
+    if (resetUserSelection) feedback.removeChild(resetUserSelection); //If prior round selections are present, remove
+
+    const displayComputerSelection = document.createElement("div");
+    displayComputerSelection.id = "computerSelection";
+    displayComputerSelection.innerText = `\nComputer selected ${computerChoice}`;
+
+    const displayUserSelection = document.createElement("div");
+    displayUserSelection.id = "userSelection";
+    displayUserSelection.innerText = `\nYou selected ${userChoice}`;
+
+    feedback.appendChild(displayComputerSelection);
+    feedback.appendChild(displayUserSelection);
+
+}
+
+function messageRoundWinner (roundStatus) {
+    const feedback = document.querySelector(".feedback");
+    
+    const roundStatusReset = document.getElementById("roundStatus"); //Identify if prior round results are still present
+    if (roundStatusReset) feedback.removeChild(roundStatusReset); // Reset message containing winner of prior round if present
 
     const displayRoundStatus = document.createElement('div');
     displayRoundStatus.id="roundStatus";
-    displayRoundStatus.innerText = `\nYou ${roundStatus}`;
+    displayRoundStatus.innerText = `\nYou ${roundStatus} this round`;
 
     feedback.appendChild(displayRoundStatus);
-    
-    
-    
-    return roundStatus;
 }
+
+
+
 
 const buttonSelection = document.querySelectorAll('button');
 buttonSelection.forEach(button => button.addEventListener('click', determineRoundWinner))
