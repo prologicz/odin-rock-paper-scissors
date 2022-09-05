@@ -7,7 +7,6 @@ function playRound (e) {
     let computerChoice = getComputerChoice();
     let userChoice = e.target.id;
 
-
     roundStatus = calculateWinner(computerChoice, userChoice);
     messageSelections(computerChoice, userChoice);
     messageRoundWinner(roundStatus);
@@ -128,7 +127,7 @@ function messageSelections (computerChoice, userChoice) {
 
     const displayUserSelection = document.createElement("div");
     displayUserSelection.id = "userSelection";
-    displayUserSelection.innerText = `\nYou selected ${userChoice}`;
+    displayUserSelection.innerText = `You selected ${userChoice}`;
 
     feedback.appendChild(displayComputerSelection);
     feedback.appendChild(displayUserSelection);
